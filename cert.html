@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+  <head>
+    <title>Certificate Page</title>
+    <script src="assets/js/jquery-3.3.1.min.js"></script>
+    <script language="Javascript1.2">
+      function certpage() {
+        window.print();
+      }
+    </script>
+  </head>
+
+  <body onload="certpage()">
+    <div class="container">
+      <img src="certbg.jpg" alt="certificate" />
+      <p id="fullname"></p>
+      <p id="date"></p>
+    </div>
+
+    <script type="text/javascript">
+      const url = window.location.href.split("?=");
+      const urlData = url[1];
+      const printVars = urlData.split("~~");
+      const info = printVars.slice(1, 2);
+
+      //append the info list
+      for (var textPosition in info) {
+        const infoList = info[textPosition];
+
+        $("#fullname").append(`${decodeURIComponent(infoList.toLowerCase())}`);
+      }
+
+      const date = new Date().toDateString().split(" ");
+      $("#date").append(`${date[2]} ${date[1]} ${date[3]}`);
+    </script>
+
+    <style type="text/css">
+      body {
+        font-family: Sans-Serif;
+        margin: 0px;
+      }
+
+      .container {
+        position: relative;
+      }
+
+      img {
+        width: 100%;
+        height: auto;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: absolute;
+      }
+
+      #fullname {
+        text-transform: capitalize;
+        font-size: 4vw;
+        font-family: Sans-serif;
+        position: absolute;
+        width: 100%;
+        top: 24vw;
+        text-align: center;
+        color: #ef590b;
+      }
+
+      #date {
+        font-size: 1.2vw;
+        font-family: Sans-serif;
+        position: absolute;
+        width: 100%;
+        top: 52vw;
+        text-align: center;
+        color: #5a5a5a;
+      }
+    </style>
+  </body>
+</html>
